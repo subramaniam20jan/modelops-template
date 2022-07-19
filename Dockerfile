@@ -1,12 +1,19 @@
 FROM python:3.10-slim
 
-# RUN apt-get update -y && apt-get install gfortran libopenblas-dev liblapack-dev
+# RUN apt-get update -y && apt-get install libblas-dev  liblapack-dev -y
 
-RUN pip install poetry
+# Add dependencies for environment management
+RUN pip install --upgrade pip ipython ipykernel poetry
 
 WORKDIR /app
 
-COPY pyproject.toml /app/
-COPY src/ /app/src/
+# Add environment related files
+# COPY pyproject.toml /app/
+# COPY poetry.lock /app/
+# RUN poetry config virtualenvs.create false
+# RUN poetry install
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
 
-RUN poetry install
+# Add source code
+COPY . /app/

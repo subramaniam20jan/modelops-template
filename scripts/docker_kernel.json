@@ -1,0 +1,19 @@
+{
+ "argv": [
+  "/usr/bin/docker",
+  "run",
+  "--network=host",
+  "-v",
+  "{connection_file}:/connection-spec",
+  "-v",
+  "../.:/app/",
+  "modelops_template",
+  "python",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "/connection-spec"
+ ],
+ "display_name": "Python in Docker",
+ "language": "python"
+}
