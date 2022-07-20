@@ -1,0 +1,10 @@
+name: Model ops template
+
+docker_env:
+  image: modelops_template
+
+entry_points:
+  main:
+    parameters:
+      text: {type: str, default: "test"}
+    command: "python worker.py echo {text}"
