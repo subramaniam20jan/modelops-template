@@ -3,8 +3,10 @@ name: Model ops template
 docker_env:
   image: modelops_template
 
+#conda_env: environment.yaml
+
 entry_points:
   main:
     parameters:
       text: {type: str, default: "test"}
-    command: "python worker.py echo {text}"
+    command: "python worker.py --text {text}"
