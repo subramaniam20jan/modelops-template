@@ -1,4 +1,4 @@
-name: Model ops template
+name: mlops_project
 
 docker_env:
   image: modelops_template
