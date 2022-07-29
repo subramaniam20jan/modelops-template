@@ -2,3 +2,6 @@ mlflow==1.26.1
 sklearn
 typer
 boto3
+pyarrow
+beautifulsoup4
+tqdm

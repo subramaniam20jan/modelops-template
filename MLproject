@@ -3,10 +3,15 @@ name: mlops_project
 docker_env:
   image: modelops_template
 
-#conda_env: environment.yaml
-
 entry_points:
-  main:
+  etl:
     parameters:
-      text: {type: str, default: "test"}
-    command: "python worker.py --text {text}"
+      run_on_delta_arg: {type: str, default: --no-run-on-delta}
+      config_grid_index_arg: {type:int, default: -1}
+    command: "python workflow_runner.py etl {run_on_delta_arg} --config-grid-index {config_grid_index_arg}"
+
+  train:
+    parameters:
+      config_grid_index_arg: {type:int, default: -1}
+      input_data_run_id_arg: {type: str}
+    command: "python workflow_runner.py train {input_data_run_id_arg} --config-grid-index {config_grid_index_arg}"

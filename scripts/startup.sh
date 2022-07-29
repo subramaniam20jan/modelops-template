@@ -17,6 +17,9 @@ python -m ipykernel install --user --name python_in_docker --display-name "Pytho
 
 cp $SCRIPT_DIR/docker_kernel.json ~/.local/share/jupyter/kernels/python_in_docker/kernel.json
 
+# Create a simple environment as well
+conda env create --file=environment.yaml
+
 ## Create a conda environment based on a container
 ## Container should be based on the docker image defined
 

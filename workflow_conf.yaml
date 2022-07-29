@@ -1,0 +1,26 @@
+train:
+  final:
+    seed: 42
+    target_name: "perAreaPrice"
+  grid:
+    seed: [42, 100]
+    target_name: ["perAreaPrice"]
+
+etl:
+  final:
+    max_area: 50
+    neighborhood: "Vesterbro"
+  grid:
+    max_area: [100]
+    neighborhood: ["Vesterbro", "Copenhagen", "Frederiskberg"]
+
+general:
+  model_name: "test"
+  experiment_name: "test"
+  log_config:
+    ml_workflow:
+      "level": "INFO"
+    root:
+      "propagate": False
+      "handlers": ["console"]
+      "level": "INFO"
