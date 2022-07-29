@@ -25,6 +25,12 @@ def run_train(input_data_run_id: list, config: dict):
         dataset = load_pandas_df(run_id=input_data_run_id)
 
         estimator = get_estimator_pipeline(config)
-        split_dataset = mhelper.split_dataset(dataset, dataset[target])
-        estimator.fit(dataset)
-        mlflow.log_model(estimator)
+        target_name = mhelper.get_target(raw_dataset=dataset, config=config)
+        split_dataset = mhelper.split_dataset(
+            dataset, dataset[target_name], config=config
+        )
+        dataset = mhelper.drop_target(dataset, config)
+
+        # Fit model and save
+        estimator.fit(dataset["features_train"], dataset["target_train"])
+        mlflow.sklearn.save_model(estimator, path="estimator")

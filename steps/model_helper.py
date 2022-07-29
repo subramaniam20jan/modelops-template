@@ -25,9 +25,19 @@ def split_dataset(
     }
 
 
-def get_target(dataset, config):
-    return dataset[config["target_name"]]
+def get_target(raw_dataset, config):
+    return raw_dataset[config["target_name"]]
 
 
 def drop_target(dataset, config):
-    dataset.drop([config["target_name"]], axis=1)
+    dataset["features_train"] = dataset["features_train"].drop(
+        [config["target_name"]], axis=1
+    )
+    dataset["features_validation"] = dataset["features_validation"].drop(
+        [config["target_name"]], axis=1
+    )
+    dataset["features_test"] = dataset["features_test"].drop(
+        [config["target_name"]], axis=1
+    )
+
+    return dataset
