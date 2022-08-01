@@ -3,6 +3,7 @@ import mlflow
 import logging
 from contextlib import contextmanager
 from mlflow.tracking import MlflowClient
+import traceback
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +20,11 @@ def set_remote_tracking(experiment_name):
 
 
 def get_mlflow_client(tracking_uri=None):
-    if tracking_uri is None:
+    current_tracking_uri = mlflow.get_tracking_uri()
+    logger.debug(f"Current tracking URI {current_tracking_uri}")
+    if current_tracking_uri.startswith("http"):
+        tracking_uri = current_tracking_uri
+    elif tracking_uri is None:
         tracking_uri = get_tracking_uri()
     return MlflowClient(tracking_uri=tracking_uri)
 

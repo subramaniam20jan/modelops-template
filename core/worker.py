@@ -5,6 +5,9 @@ from steps.etl import get_delta_dataset, get_full_dataset
 from steps.model import get_estimator_pipeline, get_feature_pipeline
 import steps.model_helper as mhelper
 import tempfile
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def run_etl(run_on_delta: bool, config: dict):
@@ -20,17 +23,26 @@ def run_etl(run_on_delta: bool, config: dict):
 
 
 def run_train(input_data_run_id: list, config: dict):
+    logger.info("Starting MLFlow experiment for training")
     with start_mlflow_run(process="train"):
+        mlflow.sklearn.autolog(log_input_examples=True)
+
         # Read the input datasets
         dataset = load_pandas_df(run_id=input_data_run_id)
 
         estimator = get_estimator_pipeline(config)
-        target_name = mhelper.get_target(raw_dataset=dataset, config=config)
-        split_dataset = mhelper.split_dataset(
-            dataset, dataset[target_name], config=config
-        )
+
+        # Isolate target
+        target = mhelper.get_target(raw_dataset=dataset, config=config)
         dataset = mhelper.drop_target(dataset, config)
 
+        # Subselect features
+        dataset = mhelper.subselect_features(dataset, config)
+
+        # Split dataset
+        split_dataset = mhelper.split_dataset(dataset, target, config=config)
+
         # Fit model and save
-        estimator.fit(dataset["features_train"], dataset["target_train"])
-        mlflow.sklearn.save_model(estimator, path="estimator")
+        estimator.fit(split_dataset["features_train"], split_dataset["target_train"])
+
+        mlflow.sklearn.log_model(sk_model=estimator, artifact_path="estimator")

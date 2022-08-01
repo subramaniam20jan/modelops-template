@@ -6,8 +6,8 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $SCRIPT_DIR
 
-conda env create --force --file=../environment.yaml -n modelops
+conda env create --force --file=../environment.yaml -p ~/.conda/modelops
 
-conda run -n modelops pip install ipykernel
+conda run -p ~/.conda/modelops pip install ipykernel
 
-conda run -n modelops python -m ipykernel install --user --name modelops --display-name "Custom env"
+conda run -p ~/.conda/modelops python -m ipykernel install --user --name modelops --display-name "Modelops env"

@@ -12,7 +12,7 @@ def split_dataset(
         features, target, test_size=test_ratio
     )
     X_train, X_validation, y_train, y_validation = train_test_split(
-        X_train, X_test, test_size=validation_ratio
+        X_train, y_train, test_size=validation_ratio
     )
 
     return {
@@ -26,18 +26,13 @@ def split_dataset(
 
 
 def get_target(raw_dataset, config):
-    return raw_dataset[config["target_name"]]
+    return raw_dataset[config["target_name"]].copy()
 
 
 def drop_target(dataset, config):
-    dataset["features_train"] = dataset["features_train"].drop(
-        [config["target_name"]], axis=1
-    )
-    dataset["features_validation"] = dataset["features_validation"].drop(
-        [config["target_name"]], axis=1
-    )
-    dataset["features_test"] = dataset["features_test"].drop(
-        [config["target_name"]], axis=1
-    )
-
+    dataset = dataset.drop([config["target_name"]], axis=1)
     return dataset
+
+
+def subselect_features(dataset, config):
+    return dataset[config["feature_list"]]

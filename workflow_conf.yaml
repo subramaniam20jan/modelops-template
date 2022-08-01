@@ -2,9 +2,11 @@ train:
   final:
     seed: 42
     target_name: "perAreaPrice"
+    feature_list: ["floor", "weightedArea", "apt_size_fine", "lat", "lon"]
   grid:
     seed: [42, 100]
     target_name: ["perAreaPrice"]
+    feature_list: [["floor", "weightedArea", "apt_size_fine", "lat", "lon"]]
 
 etl:
   final:

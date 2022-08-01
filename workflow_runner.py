@@ -25,7 +25,6 @@ def train_cmd(
     :param config_grid_index: _description_, defaults to -1
     :type config_grid_index: int, optional
     """
-    typer.echo(f"Training a model")
     logger.info("Training a model")
 
     # Setup the mlflow server and experiment
@@ -49,7 +48,6 @@ def etl_cmd(
     :param config_grid_index: _description_, defaults to -1
     :type config_grid_index: int, optional
     """
-    typer.echo(f"Performing ETL")
     logger.info("Performing ETL")
 
     # Setup the mlflow server and experiment

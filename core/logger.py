@@ -33,6 +33,4 @@ def configure_logger(incoming_log_config):
                     config
                 ]
 
-    print(logging_config)
-
     dictConfig(logging_config)
