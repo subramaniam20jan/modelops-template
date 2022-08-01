@@ -19,7 +19,6 @@ def get_delta_dataset(config: dict):
 
 
 def get_full_dataset(config: dict):
-
     neighborhood = config["neighborhood"]
     if neighborhood not in base_urls:
         logger.exception("Invalid neighborhood in config!")

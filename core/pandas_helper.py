@@ -17,7 +17,7 @@ def log_pandas_df(df_to_save, run_id):
 
     # Save some stats about the generated dataset
     df_to_save.describe().to_html(f"{run_id}_output_desc.html")
-    mlflow.log_artifact(f"{run_id}_output_desc.html", f"etl_output")
+    mlflow.log_artifact(f"{run_id}_output_desc.html", f"etl_output_metadata")
 
     # Cleanup
     os.remove(f"{run_id}.parquet")
