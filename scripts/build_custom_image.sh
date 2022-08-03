@@ -4,23 +4,20 @@ set -e
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-if docker login harbor.staging-adalab.adamatics.io --get-user; then
+if docker login harbor.staging-adalab.adamatics.io --get-login; then
     echo "Already logged into harbor"
 else
     echo "Not logged into harbor yet, please login."
     docker login harbor.staging-adalab.adamatics.io
 fi
 
+# Build the docker image
 docker build . -t modelops_template
 
-python -m ipykernel install --user --name python_in_docker --display-name "Python in Docker"
+# Install a new kernel with this image as the backend
+python -m ipykernel install --user --name python_in_docker --display-name "modelops_template-dev"
 
 cp $SCRIPT_DIR/docker_kernel.json ~/.local/share/jupyter/kernels/python_in_docker/kernel.json
 
 # Create a simple environment as well
-conda env create --file=environment.yaml
-
-## Create a conda environment based on a container
-## Container should be based on the docker image defined
-
-# Should have this folder mounted into the container
+# conda env create --file=environment.yaml
