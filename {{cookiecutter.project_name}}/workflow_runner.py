@@ -61,10 +61,12 @@ def etl_cmd(
 
 @app.command("predict")
 def predict_cmd(model_name: str, run_id: str):
-    """Command to run model prediction.
+    """Command to run a model prediction
 
-    :param config_grid_index: _description_, defaults to typer.Option(-1, help = HELP["config_grid_index"])
-    :type config_grid_index: int, optional
+    :param model_name: Name of the model to run a prediction on
+    :type model_name: str
+    :param run_id: Run id of the experiment to retrive model from
+    :type run_id: str
     """
     typer.echo(f"Performing prediction on {model_name} {run_id}")
 
