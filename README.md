@@ -30,3 +30,9 @@ Additionally if you want to utilize mlflow related features for benchmarking, ve
 1. Put relevant parts of the code into model.py and etl.py under the steps folder
 2. Configure workflow_conf.yaml with relevant input parameters
 3. Run notebooks/workflow.py to get mlflow related features
+
+## Notes
+
+1. Project name in the cruft template needs to be a valid MLFlow project name.
+2. Project name needs to be a valid conda environment name.
+3. Project name needs to be a valid jupyter kernel name.

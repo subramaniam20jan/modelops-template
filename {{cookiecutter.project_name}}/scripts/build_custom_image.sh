@@ -15,9 +15,9 @@ fi
 docker build . -t {{cookiecutter.custom_image}}
 
 # Install a new kernel with this image as the backend
-python -m ipykernel install --user --name {{cookiecutter.project_name}}_dev --display-name "{{cookiecutter.project_name}}-dev"
+python -m ipykernel install --user --name {{cookiecutter.project_name}}_docker_backed --display-name "{{cookiecutter.project_name}} docker-backed"
 
-cp $SCRIPT_DIR/docker_kernel.json ~/.local/share/jupyter/kernels/{{cookiecutter.project_name}}_dev/kernel.json
+cp $SCRIPT_DIR/docker_kernel.json ~/.local/share/jupyter/kernels/{{cookiecutter.project_name}}_docker_backed/kernel.json
 
 # Create a simple environment as well
 # conda env create --file=environment.yaml

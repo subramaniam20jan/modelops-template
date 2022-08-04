@@ -1,7 +1,7 @@
 name: {{cookiecutter.project_name}}
 
 docker_env:
-  image: modelops_template
+  image: {{cookiecutter.custom_image}}
 
 entry_points:
   etl:
