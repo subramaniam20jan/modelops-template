@@ -10,3 +10,4 @@ dependencies:
     - boto3
     - matplotlib
     - pyarrow
+    - sklearn

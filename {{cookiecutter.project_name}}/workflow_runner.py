@@ -11,7 +11,8 @@ app = typer.Typer()
 HELP = {
     "config_grid_index": "Grid index to the config to use.",
     "run_on_delta": "Run either a delta ETL load or full load",
-    "input_data_run_id": "Run id of ETL flow to use as input.",
+    "input_data_run_id": "Run id of an ETL workflow",
+    "model_run_id": "Run id of a training workflow",
 }
 
 
@@ -60,15 +61,24 @@ def etl_cmd(
 
 
 @app.command("predict")
-def predict_cmd(model_name: str, run_id: str):
+def predict_cmd(
+    input_data_run_id: str = typer.Argument(..., help=HELP["input_data_run_id"]),
+    model_run_id: str = typer.Argument(..., help=HELP["model_run_id"]),
+):
     """Command to run a model prediction
 
-    :param model_name: Name of the model to run a prediction on
-    :type model_name: str
-    :param run_id: Run id of the experiment to retrive model from
-    :type run_id: str
+    :param input_data_run_id: Run id of the experiment to retrieve input data from
+    :type input_data_run_id: str
+    :param model_run_id: Run id of the experiment to retrive model from
+    :type model_run_id: str
     """
-    typer.echo(f"Performing prediction on {model_name} {run_id}")
+    logger.info(f"Performing prediction on {input_data_run_id} with {model_run_id}")
+    config = util.load_config("workflow_conf.yaml", "train", grid_index=-1)
+    worker.run_prediction(
+        input_data_run_id=input_data_run_id,
+        model_run_id=model_run_id,
+        config=config,
+    )
 
 
 if __name__ == "__main__":

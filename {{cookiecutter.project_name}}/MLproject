@@ -15,3 +15,9 @@ entry_points:
       config_grid_index_arg: {type: int, default: -1}
       input_data_run_id_arg: {type: str}
     command: "python workflow_runner.py train {input_data_run_id_arg} --config-grid-index {config_grid_index_arg}"
+
+  predict:
+    parameters:
+      input_data_run_id_arg: {type: str}
+      model_run_id_arg: {type: str}
+    command: "python workflow_runner.py predict {input_data_run_id_arg} {model_run_id_arg}"
