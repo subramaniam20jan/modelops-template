@@ -1,4 +1,4 @@
-FROM harbor.staging-adalab.adamatics.io/base_images/{{ cookiecutter.base_images }}:latest
+FROM harbor.staging-adalab.adamatics.io/base_images/{{ cookiecutter.base_image }}:latest
 
 # Add environment related files
 COPY requirements.txt /app/
