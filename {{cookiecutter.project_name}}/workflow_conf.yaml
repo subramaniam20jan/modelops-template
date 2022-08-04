@@ -17,8 +17,8 @@ etl:
     neighborhood: ["Vesterbro", "Copenhagen", "Frederiskberg"]
 
 general:
-  model_name: "test"
-  experiment_name: "test"
+  model_name: "{{cookiecutter.model_name}}"
+  experiment_name: "{{cookiecutter.experiment_name}}"
   log_config:
     ml_workflow:
       "level": "INFO"

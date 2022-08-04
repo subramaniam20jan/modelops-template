@@ -1,4 +1,4 @@
-name: mlops_project
+name: {{cookiecutter.project_name}}
 
 docker_env:
   image: modelops_template

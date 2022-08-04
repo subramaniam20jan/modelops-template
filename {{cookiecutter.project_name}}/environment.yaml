@@ -1,4 +1,4 @@
-name: example-environment
+name: {{ cookiecutter.project_name }}
 
 dependencies:
   - python=3.10

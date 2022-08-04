@@ -1,6 +1,7 @@
 {
     "project_name": "demo_project",
     "base_image": "sklearn",
+    "custom_image": "demo_project_image",
     "experiment_name": "test",
     "model_name": "test_model"
 }

@@ -12,12 +12,12 @@ else
 fi
 
 # Build the docker image
-docker build . -t modelops_template
+docker build . -t {{cookiecutter.custom_image}}
 
 # Install a new kernel with this image as the backend
-python -m ipykernel install --user --name python_in_docker --display-name "modelops_template-dev"
+python -m ipykernel install --user --name {{cookiecutter.project_name}}_dev --display-name "{{cookiecutter.project_name}}-dev"
 
-cp $SCRIPT_DIR/docker_kernel.json ~/.local/share/jupyter/kernels/python_in_docker/kernel.json
+cp $SCRIPT_DIR/docker_kernel.json ~/.local/share/jupyter/kernels/{{cookiecutter.project_name}}_dev/kernel.json
 
 # Create a simple environment as well
 # conda env create --file=environment.yaml
